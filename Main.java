@@ -1,8 +1,13 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
+        print("Ingresa el nombre del cliente: ");
+        String nombreCliente = sc.nextLine();
+        mostrarMenu();
         
-        
+        sc.close();
     }
     static void mostrarMenu(){
         //
@@ -42,5 +47,8 @@ public class Main {
     }
     static void mostrarTicket(){
         //
+    }
+    static void print(String texto){
+        System.out.print(texto);
     }
 }
