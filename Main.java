@@ -14,7 +14,28 @@ public class Main {
         sc.close();
     }
     static void mostrarMenu(){
-        //
+        print("===================================================");
+        print("             CINTIAS'S PIZZA              ");
+        print("===================================================");
+        print("Seleccione una opción:");
+        print("[D] Descuentos y Promociones ");
+        print("[CUALQUIER LETRA] Registrar Pedido");
+        print("===================================================");
+        print("Seleccione una opcion: ");
+        String opcion = sc.nextLine();
+        switch (opcion) {
+            case "D":
+                case "d":
+                    print("===================================================");
+                    print("                PROMOCIONES Y DESCUENTOS           ");
+                    print("===================================================");
+                    print("Combo Lunes: 30% de Descuento en Pizzas.");
+                    print("");
+                    print("");
+                break;
+            default:
+                break;
+        }
     }
     static String tipoPedido(){
         String tipoPedido = "";
