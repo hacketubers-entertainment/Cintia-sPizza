@@ -3,10 +3,12 @@ import java.util.Scanner;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        mostrarMenu();
         print("Ingresa el nombre del cliente: ");
         String nombreCliente = sc.nextLine();
         String tipoPedido = tipoPedido();
-        mostrarMenu();
+        int diaSemana = diaSemana();
+
         mostrarTicket(nombreCliente, tipoPedido);
         
         sc.close();
@@ -36,8 +38,23 @@ public class Main {
         } while (invalido);
         return tipoPedido;
     }
-    static void diaSemana(){
-        //
+    static int diaSemana(){
+        int diaSemana ;
+        boolean invalido = false;
+        do {
+            print("Dia de la semana: ");
+            print("[1]: Lunes");
+            print("[2]: Martes");
+            print("[3]: Miercoles");
+            print("[4]: Jueves");
+            print("[5]: Viernes");
+            print("[6]: Sabado");
+            print("[7]: Domingo");
+            print("Ingrese el dia de la semana de 1-7");
+            diaSemana = sc.nextInt();
+            invalido = (diaSemana > 0 || diaSemana < 8) ? false : true;
+        } while (invalido);
+        return diaSemana;
     }
     static void elegirPizza(){
 
