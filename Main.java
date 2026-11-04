@@ -11,31 +11,46 @@ public class Main {
         String tipoPedido = tipoPedido();
 
         int diaSemana = diaSemana();
+        int cantidadPizza = cantidadPizzas();
+
+        String pizza = elegirPizza();
+        String tamaniopizza = tamanioPizza();
+        String especi = especialidad();
+        double precioTamanioPizza = obtenerPreciotamanio(tamaniopizza);
+        double precioEsp = obtenerPrecioEspecialidad(especi);
+        double subtotalPizzas = calcularSubtotalPizzas(precioTamanioPizza, precioEsp, cantidadPizza);
 
         // Llamadas de las BEBIDAS
         int cantidadBebidas = cantidadBebidas();
         String sabor = saborBebida();
         String tamanio = tamanioBebida();
-        
+
         String complementos = complementos();
 
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
 
         mostrarTicket(
-        nombreCliente, 
-        tipoPedido, 
-        sabor, 
-        tamanio, 
-        cantidadBebidas, 
-        complementos,  
-        precioBebida, 
-        precioComplemento);
-        
+                nombreCliente,
+                tipoPedido,
+                pizza,
+                cantidadPizza,
+                tamaniopizza,
+                especi,
+                subtotalPizzas,
+                precioTamanioPizza,
+                precioEsp,
+                sabor,
+                tamanio,
+                cantidadBebidas,
+                complementos,
+                precioBebida,
+                precioComplemento);
+
         sc.close();
     }
 
-    static void mostrarMenu(){
+    static void mostrarMenu() {
         print("===================================================");
         print("             CINTIAS'S PIZZA              ");
         print("===================================================");
@@ -47,13 +62,13 @@ public class Main {
         String opcion = sc.nextLine();
         switch (opcion) {
             case "D":
-                case "d":
-                    print("===================================================");
-                    print("                PROMOCIONES Y DESCUENTOS           ");
-                    print("===================================================");
-                    print("Combo Lunes: 30% de Descuento en Pizzas.");
-                    print("");
-                    print("");
+            case "d":
+                print("===================================================");
+                print("                PROMOCIONES Y DESCUENTOS           ");
+                print("===================================================");
+                print("Combo Lunes: 30% de Descuento en Pizzas.");
+                print("");
+                print("");
                 break;
             default:
                 break;
@@ -83,8 +98,31 @@ public class Main {
 
     // -----------------------------------------APARTADO DE SELECCION DE PIZZA +
     // TAMANIO MAS LA ESPECIALIDAD
-    static String nombrePizza, tamanio, esp;
+    // static String nombrePizza, tamanio, esp;
+    static int cantidadPizzas() {
+        int cantidad;
+        boolean invalido;
+        do {
+            invalido = false;
+            print("Cuantas pizzas quieres");
+            cantidad = sc.nextInt();
+            sc.nextLine();
+            if (cantidad < 1) {
+                print("Opcion invalida, intenta de nuevo");
+                invalido = true;
+            }
+        } while (invalido);
+
+        return cantidad;
+    }
+
+    static double calcularSubtotalPizzas(double precioTamanio, double precioEsp, int cantidadpizza) {
+        double precioUnaPizza = precioTamanio + precioEsp;
+        return precioUnaPizza * cantidadpizza;
+    }
+
     static String elegirPizza() {
+        String nombrePizza = "";
         boolean invalido;
         do {
             invalido = false;
@@ -95,6 +133,7 @@ public class Main {
             print("4. Pizza Mexicana");
 
             int opcion = sc.nextInt();
+            sc.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -116,10 +155,11 @@ public class Main {
         } while (invalido);
 
         return nombrePizza;
+
     }
 
-    static double tamanioPizza() {
-        double precioTamanio = 0;
+    static String tamanioPizza() {
+        String tamaniopizza = "";
         boolean invalido;
         do {
             invalido = false;
@@ -129,23 +169,20 @@ public class Main {
             print("3. Mediano ($200)");
             print("4. Chico ($150)");
             int opcionTamanioPizza = sc.nextInt();
+            sc.nextLine();
 
             switch (opcionTamanioPizza) {
                 case 1:
-                    tamanio = "familiar";
-                    precioTamanio = 300;
+                    tamaniopizza = "familiar";
                     break;
                 case 2:
-                    tamanio = "grande";
-                    precioTamanio = 250;
+                    tamaniopizza = "grande";
                     break;
                 case 3:
-                    tamanio = "mediano";
-                    precioTamanio = 200;
+                    tamaniopizza = "mediano";
                     break;
                 case 4:
-                    tamanio = "chico";
-                    precioTamanio = 150;
+                    tamaniopizza = "chico";
                     break;
                 default:
                     print("Opcion invalida, intenta de nuevo");
@@ -153,11 +190,26 @@ public class Main {
             }
         } while (invalido);
 
-        return precioTamanio;
+        return tamaniopizza;
     }
 
-    static double especialidad() {
-        double precioEsp = 0;
+    static double obtenerPreciotamanio(String tamaniopizza) {
+        switch (tamaniopizza) {
+            case "familiar":
+                return 300.0;
+            case "grande":
+                return 250.0;
+            case "mediano":
+                return 200.0;
+            case "chico":
+                return 150.0;
+            default:
+                return 0.0;
+        }
+    }
+
+    static String especialidad() {
+        String esp = "";
         boolean invalido;
         do {
             invalido = false;
@@ -166,19 +218,17 @@ public class Main {
             print("2. Extra queso ($25)");
             print("3. Sin especialidad ($0)");
             int opcionEsp = sc.nextInt();
+            sc.nextLine();
 
             switch (opcionEsp) {
                 case 1:
                     esp = "Orilla rellena de queso";
-                    precioEsp = 30;
                     break;
                 case 2:
                     esp = "Extra queso";
-                    precioEsp = 25;
                     break;
                 case 3:
                     esp = "Sin especialidad";
-                    precioEsp = 0;
                     break;
                 default:
                     print("Opcion invalida, intenta de nuevo");
@@ -186,11 +236,22 @@ public class Main {
             }
         } while (invalido);
 
-        return precioEsp;
+        return esp;
     }
 
-    static int diaSemana(){
-        int diaSemana ;
+    static double obtenerPrecioEspecialidad(String esp) {
+        switch (esp) {
+            case "Orilla rellena de queso":
+                return 30.0;
+            case "Extra queso":
+                return 25.0;
+            default:
+                return 0.0;
+        }
+    }
+
+    static int diaSemana() {
+        int diaSemana;
         boolean invalido = false;
         do {
             print("Dia de la semana: ");
@@ -210,18 +271,18 @@ public class Main {
     }
 
     // ---- FUNCIÓN ----
-    static int cantidadBebidas(){
+    static int cantidadBebidas() {
         int cantidad = 0;
         boolean invalido = false;
 
-        do{
+        do {
             print("¿Cuántas bebidas vas a querer?");
             cantidad = sc.nextInt();
             sc.nextLine();
 
             if (cantidad <= 0) {
                 print("Seleccione una cantidad válida");
-                invalido = true;    
+                invalido = true;
             } else {
                 invalido = false;
             }
@@ -248,8 +309,8 @@ public class Main {
                 case "S":
                     return saborBebida = "Squirt";
                 default:
-                    print("Seleccionaste una opción inválida");    
-            } 
+                    print("Seleccionaste una opción inválida");
+            }
         } while (true);
     }
 
@@ -269,11 +330,11 @@ public class Main {
                 case "G":
                     return "Grande";
                 default:
-                    print("Seleccionaste una opción inválida");           
+                    print("Seleccionaste una opción inválida");
             }
         } while (true);
     }
-    
+
     // ---- NUEVA FUNCION ----
     static double obtenerPrecioBebida(String tamanio) {
         switch (tamanio) {
@@ -288,7 +349,7 @@ public class Main {
         }
     }
 
-    static String complementos(){
+    static String complementos() {
         do {
             print("Selecciona algún complemento:");
             print("[S]: Salsas ----> $20");
@@ -320,29 +381,34 @@ public class Main {
             case "Papas a la francesa":
                 return 75.0;
             default:
-                return 0.0;        
+                return 0.0;
         }
     }
 
-
-
-    static void elegirMetodoPago(){
+    static void elegirMetodoPago() {
         //
     }
 
-    static void calcularTotal(){
+    static void calcularTotal() {
         //
     }
 
     static void mostrarTicket(
-    String nombreCliente, 
-    String tipoPedido, 
-    String saborBebida, 
-    String tamanioBebida, 
-    int cantidadBebida, 
-    String complemento, 
-    double precioBebida, 
-    double precioComplemento){
+            String nombreCliente,
+            String tipoPedido,
+            String pizza,
+            int cantidadpizza,
+            String tamaniopizza,
+            String especi,
+            double subtotalPizzas,
+            double precioTamanioPizza,
+            double precioEsp,
+            String saborBebida,
+            String tamanioBebida,
+            int cantidadBebida,
+            String complemento,
+            double precioBebida,
+            double precioComplemento) {
 
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
@@ -376,3 +442,7 @@ public class Main {
         System.out.println(texto);
     }
 }
+
+// ticket(nombreCliente, tipoPedido, diaSemana, pizza, tamaniopizza, especi,
+// precioTamanioPizza, precioEsp, sabor, tamanio, complementos,
+// precioBebida, precioComplemento);
