@@ -10,7 +10,6 @@ public class Main {
 
         String tipoPedido = tipoPedido();
 
-        int diaSemana = diaSemana();
         int cantidadPizza = cantidadPizzas();
 
         String pizza = elegirPizza();
@@ -29,6 +28,7 @@ public class Main {
 
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
+        double subtotal = calcularSubtotal(cantidadBebidas, precioBebida, precioComplemento, subtotalPizzas);
 
         mostrarTicket(
                 nombreCliente,
@@ -37,7 +37,7 @@ public class Main {
                 cantidadPizza,
                 tamaniopizza,
                 especi,
-                subtotalPizzas,
+                subtotal,
                 precioTamanioPizza,
                 precioEsp,
                 sabor,
@@ -405,6 +405,10 @@ public class Main {
         return descuento;
     }
 
+    static double calcularSubtotal(double cantidadBebida, double precioBebida, double precioComplemento, double subtotalPizzas) {
+        return subtotalPizzas + (cantidadBebida * precioBebida) + precioComplemento;
+    }
+
     static void calcularTotal() {
         //
     }
@@ -416,7 +420,7 @@ public class Main {
             int cantidadpizza,
             String tamaniopizza,
             String especi,
-            double subtotalPizzas,
+            double subtotal,
             double precioTamanioPizza,
             double precioEsp,
             String saborBebida,
@@ -441,7 +445,7 @@ public class Main {
         print("" + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
         print(" 1     Complemento: " + complemento + " " + "   $" + precioComplemento);
         print("=========================================");
-        print("SUBTOTAL:                         $250.50");
+        print("SUBTOTAL:                         $" + subtotal);
         print("DESCUENTO APLICADO                -$75.15");
         print("IVA (16%)                          $28.06");
         print("");
