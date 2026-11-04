@@ -4,21 +4,33 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        mostrarMenu();
         print("Ingresa el nombre del cliente: ");
         String nombreCliente = sc.nextLine();
+        mostrarMenu();
+
         String tipoPedido = tipoPedido();
+
         int diaSemana = diaSemana();
 
+        // Llamadas de las BEBIDAS
+        int cantidadBebidas = cantidadBebidas();
         String sabor = saborBebida();
         String tamanio = tamanioBebida();
+        
         String complementos = complementos();
 
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
 
-        mostrarTicket(nombreCliente, tipoPedido, sabor, tamanio, complementos, 
-        precioBebida, precioComplemento);
+        mostrarTicket(
+        nombreCliente, 
+        tipoPedido, 
+        sabor, 
+        tamanio, 
+        cantidadBebidas, 
+        complementos,  
+        precioBebida, 
+        precioComplemento);
         
         sc.close();
     }
@@ -191,15 +203,30 @@ public class Main {
             print("[7]: Domingo");
             print("Ingrese el dia de la semana de 1-7");
             diaSemana = sc.nextInt();
+            sc.nextLine();
             invalido = (diaSemana > 0 || diaSemana < 8) ? false : true;
         } while (invalido);
         return diaSemana;
     }
 
     // ---- FUNCIÓN ----
-    static void elegirBebida(){
-        print("Elija el sabor de su bebida:");
-        String elegirBebida = sc.nextLine();
+    static int cantidadBebidas(){
+        int cantidad = 0;
+        boolean invalido = false;
+
+        do{
+            print("¿Cuántas bebidas vas a querer?");
+            cantidad = sc.nextInt();
+            sc.nextLine();
+
+            if (cantidad <= 0) {
+                print("Seleccione una cantidad válida");
+                invalido = true;    
+            } else {
+                invalido = false;
+            }
+        } while (invalido);
+        return cantidad;
     }
 
     // ---- FUNCIÓN ----
@@ -307,9 +334,15 @@ public class Main {
         //
     }
 
-    static void mostrarTicket(String nombreCliente, String tipoPedido, 
-    String saborBebida, String tamanioBebida, String complemento, 
-    double precioBebida, double precioComplemento){
+    static void mostrarTicket(
+    String nombreCliente, 
+    String tipoPedido, 
+    String saborBebida, 
+    String tamanioBebida, 
+    int cantidadBebida, 
+    String complemento, 
+    double precioBebida, 
+    double precioComplemento){
 
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
@@ -323,8 +356,8 @@ public class Main {
         print("CANT.  DESCRIPCIÓN               PRECIO");
         print("=========================================");
         print(" 1     Pizza Grande Pepperoni    $180.00");
-        print(" 1     Refr. " + saborBebida + " " + tamanioBebida + " $" + precioBebida);
-        print(" 1     Complemento " + complemento + " " + " $" + precioComplemento);
+        print("" + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
+        print(" 1     Complemento: " + complemento + " " + "   $" + precioComplemento);
         print("=========================================");
         print("SUBTOTAL:                         $250.50");
         print("DESCUENTO APLICADO                -$75.15");
