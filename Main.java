@@ -29,6 +29,7 @@ public class Main {
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
         double subtotal = calcularSubtotal(cantidadBebidas, precioBebida, precioComplemento, subtotalPizzas);
+        double total = calcularTotal(subtotal);
 
         mostrarTicket(
                 nombreCliente,
@@ -45,7 +46,8 @@ public class Main {
                 cantidadBebidas,
                 complementos,
                 precioBebida,
-                precioComplemento);
+                precioComplemento,
+                total);
 
         sc.close();
     }
@@ -409,8 +411,9 @@ public class Main {
         return (subtotalPizzas * calcularDescuento()) + (cantidadBebida * precioBebida) + precioComplemento;
     }
 
-    static void calcularTotal() {
-        //
+    static double calcularTotal(double subtotal) {
+        double iva = subtotal * 0.16;
+        return subtotal + iva;
     }
 
     static void mostrarTicket(
@@ -428,7 +431,8 @@ public class Main {
             int cantidadBebida,
             String complemento,
             double precioBebida,
-            double precioComplemento) {
+            double precioComplemento,
+            double total) {
 
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
@@ -447,9 +451,9 @@ public class Main {
         print("=========================================");
         print("SUBTOTAL:                         $" + subtotal);
         print("DESCUENTO APLICADO                -$75.15");
-        print("IVA (16%)                          $28.06");
+        print("IVA (16%)                          $" + (total - subtotal));
         print("");
-        print("TOTAL A PAGAR:                    $203.41");
+        print("TOTAL A PAGAR:                    $" + total);
         print("");
         print("Pago en Tarjeta:                  $500.00");
         print("Cambio:                           $296.59");
