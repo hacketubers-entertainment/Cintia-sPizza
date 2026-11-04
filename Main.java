@@ -9,10 +9,21 @@ public class Main {
         String tipoPedido = tipoPedido();
         int diaSemana = diaSemana();
 
-        mostrarTicket(nombreCliente, tipoPedido);
+        mostrarMenu();
+
+        String sabor = saborBebida();
+        String tamanio = tamanioBebida();
+        String complementos = complementos();
+
+        double precioBebida = obtenerPrecioBebida(tamanio);
+        double precioComplemento = obtenerPrecioComplemento(complementos);
+
+        mostrarTicket(nombreCliente, tipoPedido, sabor, tamanio, complementos, 
+        precioBebida, precioComplemento);
         
         sc.close();
     }
+
     static void mostrarMenu(){
         print("===================================================");
         print("             CINTIAS'S PIZZA              ");
@@ -43,13 +54,11 @@ public class Main {
         do {
             print("Selecciona tu tipo de pedido: ");
             print("[L]: Para llevar ");
-            print("[C]: Para comer aqui ");
-            tipoPedido = sc.next();
-            switch (tipoPedido) {
-                case "l":
+            print("[C]: Para comer aquí ");
+            tipoPedido = sc.nextLine();
+            switch (tipoPedido.toUpperCase()) {
                 case "L":
                     return tipoPedido = "Para llevar";
-                case "c":
                 case "C":
                     return tipoPedido = "Para comer aqui";
                 default: 
@@ -57,7 +66,7 @@ public class Main {
                 invalido = true;
             }
         } while (invalido);
-        return tipoPedido;
+        return "tipoPedido";
     }
     static int diaSemana(){
         int diaSemana ;
@@ -77,34 +86,134 @@ public class Main {
         } while (invalido);
         return diaSemana;
     }
+
     static void elegirPizza(){
 
     }
+
     static void tamanioPizza(){
         //
     }
+
     static void especialidad(){
         //
     }
+
+    // ---- FUNCIÓN ----
     static void elegirBebida(){
-        //
+        print("Elija el sabor de su bebida:");
+        String elegirBebida = sc.nextLine();
     }
-    static void saborBebida(){
-        //
+
+    // ---- FUNCIÓN ----
+    static String saborBebida() {
+        do {
+            print("[C]: Coca-Cola");
+            print("[P]: Pepsi");
+            print("[M]: Mundet");
+            print("[S]: Squirt");
+            print("Opción: ");
+            String saborBebida = sc.nextLine();
+            switch (saborBebida.toUpperCase()) {
+                case "C":
+                    return saborBebida = "Coca-Cola";
+                case "P":
+                    return saborBebida = "Pepsi";
+                case "M":
+                    return saborBebida = "Mundet";
+                case "S":
+                    return saborBebida = "Squirt";
+                default:
+                    print("Seleccionaste una opción inválida");    
+            } 
+        } while (true);
     }
-    static void tamanioBebida(){
-        //
+
+    // ---- FUNCIÓN ----
+    static String tamanioBebida() {
+        do {
+            print("[C]: Chico ----> $16");
+            print("[M]: Mediano ----> $20");
+            print("[G]: Grande ----> $25");
+            print("Opción: ");
+            String tamanioBebida = sc.nextLine();
+            switch (tamanioBebida.toUpperCase()) {
+                case "C":
+                    return "Chico";
+                case "M":
+                    return "Mediano";
+                case "G":
+                    return "Grande";
+                default:
+                    print("Seleccionaste una opción inválida");           
+            }
+        } while (true);
     }
-    static void complementos(){
-        //
+    
+    // ---- NUEVA FUNCION ----
+    static double obtenerPrecioBebida(String tamanio) {
+        switch (tamanio) {
+            case "Chico":
+                return 16.0;
+            case "Mediano":
+                return 20.0;
+            case "Grande":
+                return 25.0;
+            default:
+                return 0.0;
+        }
     }
+
+    static String complementos(){
+        do {
+            print("Selecciona algún complemento:");
+            print("[S]: Salsas ----> $20");
+            print("[P]: Pan con ajo ----> $50");
+            print("[F]: Papas a la francesa ----> $75");
+            print("Opción: ");
+            String elegirComplemento = sc.nextLine();
+
+            switch (elegirComplemento.toUpperCase()) {
+                case "S":
+                    return "Salsas";
+                case "P":
+                    return "Pan con ajo";
+                case "F":
+                    return "Papas a la francesa";
+                default:
+                    print("Seleccionaste una opción inválida");
+            }
+        } while (true);
+    }
+
+    // ---- FUNCIÓN ----
+    static double obtenerPrecioComplemento(String complemento) {
+        switch (complemento) {
+            case "Salsas":
+                return 20.0;
+            case "Pan con ajo":
+                return 50.0;
+            case "Papas a la francesa":
+                return 75.0;
+            default:
+                return 0.0;        
+        }
+    }
+
+
+
     static void elegirMetodoPago(){
         //
     }
+
     static void calcularTotal(){
         //
     }
-    static void mostrarTicket(String nombreCliente, String tipoPedido){
+
+    static void mostrarTicket(String nombreCliente, String tipoPedido, 
+    String saborBebida, String tamanioBebida, String complemento, 
+    double precioBebida, double precioComplemento){
+
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
         print("            TICKET DE COMPRA             ");
@@ -117,8 +226,8 @@ public class Main {
         print("CANT.  DESCRIPCIÓN               PRECIO");
         print("=========================================");
         print(" 1     Pizza Grande Pepperoni    $180.00");
-        print(" 1     Refr. Coca-Cola Grande     $45.00");
-        print(" 1     Extra Queso                $25.50");
+        print(" 1     Refr. " + saborBebida + " " + tamanioBebida + " $" + precioBebida);
+        print(" 1     Complemento " + complemento + " " + " $" + precioComplemento);
         print("=========================================");
         print("SUBTOTAL:                         $250.50");
         print("DESCUENTO APLICADO                -$75.15");
