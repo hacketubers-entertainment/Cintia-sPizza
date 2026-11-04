@@ -406,7 +406,7 @@ public class Main {
     }
 
     static double calcularSubtotal(double cantidadBebida, double precioBebida, double precioComplemento, double subtotalPizzas) {
-        return subtotalPizzas + (cantidadBebida * precioBebida) + precioComplemento;
+        return (subtotalPizzas * calcularDescuento()) + (cantidadBebida * precioBebida) + precioComplemento;
     }
 
     static void calcularTotal() {
