@@ -30,6 +30,8 @@ public class Main {
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
 
+        String metodoPago = elegirMetodoPago();
+
         mostrarTicket(
                 nombreCliente,
                 tipoPedido,
@@ -45,7 +47,8 @@ public class Main {
                 cantidadBebidas,
                 complementos,
                 precioBebida,
-                precioComplemento);
+                precioComplemento,
+                metodoPago);
 
         sc.close();
     }
@@ -385,8 +388,25 @@ public class Main {
         }
     }
 
-    static void elegirMetodoPago() {
-        //
+
+
+    static String elegirMetodoPago(){
+        while (true) {
+            print("Método de pago:");
+            print("[E]: Efectivo");
+            print("[T]: Tarjeta");
+            print("Opción: ");
+            String metodoDePago = sc.nextLine();
+
+            switch (metodoDePago.toUpperCase()) {
+                case "E":
+                    return "Efectivo";
+                case "T":
+                    return "Tarjeta";
+                default:
+                    print("Seleccionaste un método de pago inválido");        
+            }
+        }
     }
 
     static void calcularTotal() {
@@ -408,7 +428,8 @@ public class Main {
             int cantidadBebida,
             String complemento,
             double precioBebida,
-            double precioComplemento) {
+            double precioComplemento,
+            String elegirMetodoPago) {
 
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
@@ -431,8 +452,12 @@ public class Main {
         print("");
         print("TOTAL A PAGAR:                    $203.41");
         print("");
-        print("Pago en Tarjeta:                  $500.00");
-        print("Cambio:                           $296.59");
+        if (elegirMetodoPago.equals("Efectivo")) {
+            print("Pagó con: Efectivo:           $500.00");
+            print("Cambio:                       $296.59");   
+        } else {
+            print("Pagó con Tarjeta:             $203.41");
+        }
         print("=========================================");
         print("   ¡Gracias por su compra en Cinthia's!  ");
         print("=========================================");
