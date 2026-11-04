@@ -9,14 +9,6 @@ public class Main {
         String tipoPedido = tipoPedido();
         mostrarMenu();
 
-        String pizza = elegirPizza();
-        double precioTamanio = tamanioPizza();
-        double precioEsp = especialidad();
-
-        print("Pizza: " + pizza);
-        print("Tamaño: " + tamanio + " $" + precioTamanio);
-        print("Especialidad: " + esp + " $" + precioEsp);
-
         mostrarTicket(nombreCliente, tipoPedido);
 
         sc.close();
