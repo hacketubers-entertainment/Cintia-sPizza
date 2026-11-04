@@ -28,7 +28,9 @@ public class Main {
 
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
-        double subtotal = calcularSubtotal(cantidadBebidas, precioBebida, precioComplemento, subtotalPizzas);
+        double factorDescuento = calcularDescuento();
+        double descuento = subtotalPizzas * (1 - factorDescuento);
+        double subtotal = calcularSubtotal(cantidadBebidas, precioBebida, precioComplemento, subtotalPizzas * factorDescuento);
         double total = calcularTotal(subtotal);
 
         mostrarTicket(
@@ -47,7 +49,8 @@ public class Main {
                 complementos,
                 precioBebida,
                 precioComplemento,
-                total);
+                total,
+                descuento);
 
         sc.close();
     }
@@ -408,7 +411,7 @@ public class Main {
     }
 
     static double calcularSubtotal(double cantidadBebida, double precioBebida, double precioComplemento, double subtotalPizzas) {
-        return (subtotalPizzas * calcularDescuento()) + (cantidadBebida * precioBebida) + precioComplemento;
+        return subtotalPizzas + (cantidadBebida * precioBebida) + precioComplemento;
     }
 
     static double calcularTotal(double subtotal) {
@@ -432,7 +435,8 @@ public class Main {
             String complemento,
             double precioBebida,
             double precioComplemento,
-            double total) {
+            double total,
+            double descuento) {
 
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
@@ -445,12 +449,12 @@ public class Main {
         print("=========================================");
         print("CANT.  DESCRIPCIÓN               PRECIO");
         print("=========================================");
-        print(" 1     Pizza Grande Pepperoni    $180.00");
+        print("" + cantidadpizza + "     " + " " + pizza + " " + tamaniopizza + "       $" + (precioTamanioPizza + precioEsp) * cantidadpizza);
         print("" + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
         print(" 1     Complemento: " + complemento + " " + "   $" + precioComplemento);
         print("=========================================");
         print("SUBTOTAL:                         $" + subtotal);
-        print("DESCUENTO APLICADO                -$75.15");
+        print("DESCUENTO APLICADO                -$" + descuento);
         print("IVA (16%)                          $" + (total - subtotal));
         print("");
         print("TOTAL A PAGAR:                    $" + total);
