@@ -96,9 +96,6 @@ public class Main {
         return "tipoPedido";
     }
 
-    // -----------------------------------------APARTADO DE SELECCION DE PIZZA +
-    // TAMANIO MAS LA ESPECIALIDAD
-    // static String nombrePizza, tamanio, esp;
     static int cantidadPizzas() {
         int cantidad;
         boolean invalido;
@@ -387,6 +384,25 @@ public class Main {
 
     static void elegirMetodoPago() {
         //
+    }
+
+    static double calcularDescuento(){
+        double descuento = 1.0;
+        int diaSemana = diaSemana();
+        switch (diaSemana) {
+            case 1:
+                descuento = 0.7;
+                break;
+            case 3:
+                descuento = 0.5;
+                break;
+            case 6: case 7:
+                descuento = 0.9;
+                break;
+            default:
+                break;
+        }
+        return descuento;
     }
 
     static void calcularTotal() {
