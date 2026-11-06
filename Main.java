@@ -65,7 +65,7 @@ public class Main {
         print("===================================================");
         print("             CINTIAS'S PIZZA              ");
         print("===================================================");
-        print("Seleccione una opción:");
+        print("Seleccione una opcion:");
         print("[D] Mostrar Descuentos y Promociones ");
         print("[CUALQUIER LETRA] Registrar Pedido");
         print("===================================================");
