@@ -251,7 +251,7 @@ public class Main {
                 case "S":
                     return saborBebida = "Squirt";
                 default:
-                    print("Seleccionaste una opción invalida. Intentalo de nuevo: ");    
+                    print("Seleccionaste una opcion invalida. Intentalo de nuevo: ");    
             } 
         } while (true);
     }
@@ -262,7 +262,7 @@ public class Main {
             print("[C]: Chico ----> $16");
             print("[M]: Mediano ----> $20");
             print("[G]: Grande ----> $25");
-            print("Opción: ");
+            print("Opcion: ");
             String tamanioBebida = sc.nextLine();
             switch (tamanioBebida.toUpperCase()) {
                 case "C":
@@ -297,7 +297,7 @@ public class Main {
             print("[S]: Salsas ----> $20");
             print("[P]: Pan con ajo ----> $50");
             print("[F]: Papas a la francesa ----> $75");
-            print("Opción: ");
+            print("Opcion: ");
             String elegirComplemento = sc.nextLine();
 
             switch (elegirComplemento.toUpperCase()) {
