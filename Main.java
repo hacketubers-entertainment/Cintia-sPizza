@@ -4,9 +4,9 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        mostrarMenu();
         print("Ingresa el nombre del cliente: ");
         String nombreCliente = sc.nextLine();
-        mostrarMenu();
 
         String tipoPedido = tipoPedido();
 
@@ -63,7 +63,7 @@ public class Main {
         print("             CINTIAS'S PIZZA              ");
         print("===================================================");
         print("Seleccione una opción:");
-        print("[D] Descuentos y Promociones ");
+        print("[D] Mostrar Descuentos y Promociones ");
         print("[CUALQUIER LETRA] Registrar Pedido");
         print("===================================================");
         print("Seleccione una opcion: ");
@@ -75,6 +75,8 @@ public class Main {
                 print("                PROMOCIONES Y DESCUENTOS           ");
                 print("===================================================");
                 print("Combo Lunes: 30% de Descuento en Pizzas.");
+                print("Combo Miercoles: 50% de Descuento en Pizzas.");
+                print("Combo Sabado y Domingo: 10% de Descuento en Pizzas.");
                 print("");
                 print("");
                 break;
