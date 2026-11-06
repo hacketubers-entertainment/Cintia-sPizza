@@ -36,6 +36,7 @@ public class Main {
         double total = calcularTotal(subtotal);
 
         String metodoPago = elegirMetodoPago();
+        double pago = realizarPago(total);
 
         mostrarTicket(
                 nombreCliente,
@@ -56,7 +57,8 @@ public class Main {
                 precioComplemento,
                 total,
                 descuento,
-                metodoPago);
+                metodoPago,
+                pago);
 
         sc.close();
     }
@@ -414,8 +416,6 @@ public class Main {
         }
     }
 
-
-
     static String elegirMetodoPago(){
         while (true) {
             print("Metodo de pago:");
@@ -480,6 +480,33 @@ public class Main {
         double iva = subtotal * 0.16;
         return subtotal + iva;
     }
+    
+    static double realizarPago(double total) {
+        double pago = 0.0;
+        do {
+            print("El cliente paga con: ");
+            pago = sc.nextDouble();
+            if (pago < total) {
+                print("El pago no es suficiente!");
+            }
+        } while (pago < total);
+        
+        return pago;
+    }
+
+    static double calcularCambio(double total, double pago) {
+        return pago - total;
+    }
+
+
+     static void mostrarPago(String metodoDePago, double pago, double total) {
+        if (metodoDePago.equals("Efectivo")) {
+            print("PAGO EN EFECTIVO:                 $" + pago);
+            print("CAMBIO:                           $" + calcularCambio(total, pago));
+        } else {
+            print("PAGO CON TARJETA:                 $" + total);
+        }
+    }
 
     static void mostrarTicket(
             String nombreCliente,
@@ -500,7 +527,8 @@ public class Main {
             double precioComplemento,
             double total,
             double descuento,
-            String elegirMetodoPago) {
+            String elegirMetodoPago,
+            double pago) {
 
         print("=========================================");
         print("             CINTHIA'S PIZZA             ");
@@ -523,12 +551,7 @@ public class Main {
         print("");
         print("TOTAL A PAGAR:                    $" + total);
         print("");
-        if (elegirMetodoPago.equals("Efectivo")) {
-            print("PAGO CON TARJETA           $500.00");
-            print("CAMBIO:                       $296.59");   
-        } else {
-            print("Pago con Tarjeta:                 $203.41");
-        }
+        mostrarPago(elegirMetodoPago, pago, total);
         print("=========================================");
         print("   ¡Gracias por su compra en Cinthia's!  ");
         print("=========================================");
