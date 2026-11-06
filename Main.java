@@ -26,9 +26,11 @@ public class Main {
 
         String complementos = complementos();
 
+        String diaSemana = diaSemana();
+
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
-        double factorDescuento = calcularDescuento();
+        double factorDescuento = calcularDescuento(diaSemana);
         double descuento = subtotalPizzas * (1 - factorDescuento);
         double subtotal = calcularSubtotal(cantidadBebidas, precioBebida, precioComplemento, subtotalPizzas * factorDescuento);
         double total = calcularTotal(subtotal);
@@ -49,6 +51,7 @@ public class Main {
                 tamanio,
                 cantidadBebidas,
                 complementos,
+                diaSemana,
                 precioBebida,
                 precioComplemento,
                 total,
@@ -432,9 +435,8 @@ public class Main {
         }
     }
 
-    static double calcularDescuento(){
+    static double calcularDescuento(String diaSemana){
         double descuento = 1.0;
-        String diaSemana = diaSemana();
         switch (diaSemana) {
             case "Lunes":
                 descuento = 0.7;
@@ -449,6 +451,25 @@ public class Main {
                 break;
         }
         return descuento;
+    }
+
+    static String promocion(String dia){
+        String promocion = "";
+        switch (dia) {
+            case "Lunes":
+                promocion = "Combo Lunes: 30% de Descuento en Pizzas";
+                break;
+            case "Miercoles":
+                promocion = "Combo Miercoles: 50% de Descuento en Pizzas";
+                break;
+            case "Sabado": case "Domingo":
+                promocion = "Combo Sabado y Domingo: 10% de Descuento en Pizzas";
+                break;
+            default:
+                promocion = "Sin promocion aplicada";
+                break;
+        }
+        return promocion;
     }
 
     static double calcularSubtotal(double cantidadBebida, double precioBebida, double precioComplemento, double subtotalPizzas) {
@@ -474,6 +495,7 @@ public class Main {
             String tamanioBebida,
             int cantidadBebida,
             String complemento,
+            String diaSemana,
             double precioBebida,
             double precioComplemento,
             double total,
@@ -486,7 +508,7 @@ public class Main {
         print("=========================================");
         print("Cliente: " + nombreCliente);
         print("Tipo: " + tipoPedido);
-        print("Día: Lunes (Promocion del 30% aplicada)");
+        print("Dia: " + diaSemana + " " + promocion(diaSemana));
         print("Fecha: 28/09/2026");
         print("=========================================");
         print("CANT.  DESCRIPCIÓN               PRECIO");
