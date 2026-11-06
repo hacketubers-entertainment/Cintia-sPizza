@@ -513,7 +513,7 @@ public class Main {
         print("=========================================");
         print("CANT.  DESCRIPCIÓN               PRECIO");
         print("=========================================");
-        print(" 1     Pizza Grande Pepperoni    $180.00");
+        print("" + cantidadpizza + "     " + " " + pizza + " " + tamaniopizza + "       $" + (precioTamanioPizza + precioEsp) * cantidadpizza);
         print(" " + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
         print(" 1     Complemento: " + complemento + " " + "   $" + precioComplemento);
         print("=========================================");
