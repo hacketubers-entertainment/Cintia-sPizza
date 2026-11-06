@@ -218,12 +218,12 @@ public class Main {
         boolean invalido = false;
 
         do{
-            print("¿Cuántas bebidas vas a querer?");
+            print("¿Cuantas bebidas vas a querer?");
             cantidad = sc.nextInt();
             sc.nextLine();
 
             if (cantidad <= 0) {
-                print("Seleccione una cantidad válida");
+                print("Seleccione una cantidad valida");
                 invalido = true;    
             } else {
                 invalido = false;
@@ -239,7 +239,7 @@ public class Main {
             print("[P]: Pepsi");
             print("[M]: Mundet");
             print("[S]: Squirt");
-            print("Opción: ");
+            print("Opcion: ");
             String saborBebida = sc.nextLine();
             switch (saborBebida.toUpperCase()) {
                 case "C":
@@ -251,7 +251,7 @@ public class Main {
                 case "S":
                     return saborBebida = "Squirt";
                 default:
-                    print("Seleccionaste una opción inválida");    
+                    print("Seleccionaste una opción invalida. Intentalo de nuevo: ");    
             } 
         } while (true);
     }
@@ -272,7 +272,7 @@ public class Main {
                 case "G":
                     return "Grande";
                 default:
-                    print("Seleccionaste una opción inválida");           
+                    print("Seleccionaste una opcion invalida. Intentalo de nuevo: ");           
             }
         } while (true);
     }
@@ -308,7 +308,7 @@ public class Main {
                 case "F":
                     return "Papas a la francesa";
                 default:
-                    print("Seleccionaste una opción inválida");
+                    print("Seleccionaste una opcion invalida. Intentalo de nuevo: ");
             }
         } while (true);
     }
@@ -331,10 +331,10 @@ public class Main {
 
     static String elegirMetodoPago(){
         while (true) {
-            print("Método de pago:");
+            print("Metodo de pago:");
             print("[E]: Efectivo");
             print("[T]: Tarjeta");
-            print("Opción: ");
+            print("Opcion: ");
             String metodoDePago = sc.nextLine();
 
             switch (metodoDePago.toUpperCase()) {
@@ -343,7 +343,7 @@ public class Main {
                 case "T":
                     return "Tarjeta";
                 default:
-                    print("Seleccionaste un método de pago inválido");        
+                    print("Seleccionaste un metodo de pago invalido. Intentalo de nuevo ");        
             }
         }
     }
@@ -375,7 +375,7 @@ public class Main {
         print("CANT.  DESCRIPCIÓN               PRECIO");
         print("=========================================");
         print(" 1     Pizza Grande Pepperoni    $180.00");
-        print("" + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
+        print(" " + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
         print(" 1     Complemento: " + complemento + " " + "   $" + precioComplemento);
         print("=========================================");
         print("SUBTOTAL:                         $250.50");
@@ -385,10 +385,10 @@ public class Main {
         print("TOTAL A PAGAR:                    $203.41");
         print("");
         if (elegirMetodoPago.equals("Efectivo")) {
-            print("Pagó con: Efectivo:           $500.00");
+            print("Pago con: Efectivo            $500.00");
             print("Cambio:                       $296.59");   
         } else {
-            print("Pagó con Tarjeta:             $203.41");
+            print("Pago con Tarjeta:             $203.41");
         }
         print("=========================================");
         print("   ¡Gracias por su compra en Cinthia's!  ");
