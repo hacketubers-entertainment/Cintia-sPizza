@@ -255,9 +255,10 @@ public class Main {
         }
     }
 
-    static int diaSemana() {
-        int diaSemana;
-        boolean invalido = false;
+    static String diaSemana() {
+        String diaSemana = "";
+        int opcion;
+        boolean invalido = true;
         do {
             print("Dia de la semana: ");
             print("[1]: Lunes");
@@ -268,9 +269,27 @@ public class Main {
             print("[6]: Sabado");
             print("[7]: Domingo");
             print("Ingrese el dia de la semana de 1-7");
-            diaSemana = sc.nextInt();
+            opcion = sc.nextInt();
             sc.nextLine();
-            invalido = (diaSemana > 0 || diaSemana < 8) ? false : true;
+            switch (opcion) {
+                case 1:
+                    return diaSemana = "Lunes";
+                case 2:
+                    return diaSemana = "Martes";
+                case 3:
+                    return diaSemana = "Miercoles";
+                case 4:
+                    return diaSemana = "Jueves";
+                case 5:
+                    return diaSemana = "Viernes";
+                case 6:
+                    return diaSemana = "Sabado";
+                case 7:
+                    return diaSemana = "Domingo";
+                default:
+                    print("Dia invalido. Ingrese nuevamente");
+                    break;
+            }
         } while (invalido);
         return diaSemana;
     }
@@ -413,15 +432,15 @@ public class Main {
 
     static double calcularDescuento(){
         double descuento = 1.0;
-        int diaSemana = diaSemana();
+        String diaSemana = diaSemana();
         switch (diaSemana) {
-            case 1:
+            case "Lunes":
                 descuento = 0.7;
                 break;
-            case 3:
+            case "Miercoles":
                 descuento = 0.5;
                 break;
-            case 6: case 7:
+            case "Sabado": case "Domingo":
                 descuento = 0.9;
                 break;
             default:
