@@ -293,7 +293,7 @@ public class Main {
 
     static String complementos(){
         do {
-            print("Selecciona algún complemento:");
+            print("Selecciona algun complemento: ");
             print("[S]: Salsas ----> $20");
             print("[P]: Pan con ajo ----> $50");
             print("[F]: Papas a la francesa ----> $75");
@@ -385,10 +385,10 @@ public class Main {
         print("TOTAL A PAGAR:                    $203.41");
         print("");
         if (elegirMetodoPago.equals("Efectivo")) {
-            print("Pago con: Efectivo            $500.00");
-            print("Cambio:                       $296.59");   
+            print("PAGO CON TARJETA           $500.00");
+            print("CAMBIO:                       $296.59");   
         } else {
-            print("Pago con Tarjeta:             $203.41");
+            print("Pago con Tarjeta:                 $203.41");
         }
         print("=========================================");
         print("   ¡Gracias por su compra en Cinthia's!  ");
