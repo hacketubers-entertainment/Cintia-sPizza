@@ -10,7 +10,6 @@ public class Main {
 
         String tipoPedido = tipoPedido();
 
-        int diaSemana = diaSemana();
         int cantidadPizza = cantidadPizzas();
 
         String pizza = elegirPizza();
@@ -29,6 +28,10 @@ public class Main {
 
         double precioBebida = obtenerPrecioBebida(tamanio);
         double precioComplemento = obtenerPrecioComplemento(complementos);
+        double factorDescuento = calcularDescuento();
+        double descuento = subtotalPizzas * (1 - factorDescuento);
+        double subtotal = calcularSubtotal(cantidadBebidas, precioBebida, precioComplemento, subtotalPizzas * factorDescuento);
+        double total = calcularTotal(subtotal);
 
         String metodoPago = elegirMetodoPago();
 
@@ -39,7 +42,7 @@ public class Main {
                 cantidadPizza,
                 tamaniopizza,
                 especi,
-                subtotalPizzas,
+                subtotal,
                 precioTamanioPizza,
                 precioEsp,
                 sabor,
@@ -48,6 +51,8 @@ public class Main {
                 complementos,
                 precioBebida,
                 precioComplemento,
+                total,
+                descuento,
                 metodoPago);
 
         sc.close();
@@ -99,9 +104,6 @@ public class Main {
         return "tipoPedido";
     }
 
-    // -----------------------------------------APARTADO DE SELECCION DE PIZZA +
-    // TAMANIO MAS LA ESPECIALIDAD
-    // static String nombrePizza, tamanio, esp;
     static int cantidadPizzas() {
         int cantidad;
         boolean invalido;
@@ -409,8 +411,32 @@ public class Main {
         }
     }
 
-    static void calcularTotal() {
-        //
+    static double calcularDescuento(){
+        double descuento = 1.0;
+        int diaSemana = diaSemana();
+        switch (diaSemana) {
+            case 1:
+                descuento = 0.7;
+                break;
+            case 3:
+                descuento = 0.5;
+                break;
+            case 6: case 7:
+                descuento = 0.9;
+                break;
+            default:
+                break;
+        }
+        return descuento;
+    }
+
+    static double calcularSubtotal(double cantidadBebida, double precioBebida, double precioComplemento, double subtotalPizzas) {
+        return subtotalPizzas + (cantidadBebida * precioBebida) + precioComplemento;
+    }
+
+    static double calcularTotal(double subtotal) {
+        double iva = subtotal * 0.16;
+        return subtotal + iva;
     }
 
     static void mostrarTicket(
@@ -420,7 +446,7 @@ public class Main {
             int cantidadpizza,
             String tamaniopizza,
             String especi,
-            double subtotalPizzas,
+            double subtotal,
             double precioTamanioPizza,
             double precioEsp,
             String saborBebida,
@@ -429,6 +455,8 @@ public class Main {
             String complemento,
             double precioBebida,
             double precioComplemento,
+            double total,
+            double descuento,
             String elegirMetodoPago) {
 
         print("=========================================");
@@ -442,15 +470,15 @@ public class Main {
         print("=========================================");
         print("CANT.  DESCRIPCIÓN               PRECIO");
         print("=========================================");
-        print(" 1     Pizza Grande Pepperoni    $180.00");
+        print("" + cantidadpizza + "     " + " " + pizza + " " + tamaniopizza + "       $" + (precioTamanioPizza + precioEsp) * cantidadpizza);
         print("" + cantidadBebida + "    Refr. " + saborBebida + " " + tamanioBebida + "       $" + precioBebida * cantidadBebida);
         print(" 1     Complemento: " + complemento + " " + "   $" + precioComplemento);
         print("=========================================");
-        print("SUBTOTAL:                         $250.50");
-        print("DESCUENTO APLICADO                -$75.15");
-        print("IVA (16%)                          $28.06");
+        print("SUBTOTAL:                         $" + subtotal);
+        print("DESCUENTO APLICADO                -$" + descuento);
+        print("IVA (16%)                          $" + (total - subtotal));
         print("");
-        print("TOTAL A PAGAR:                    $203.41");
+        print("TOTAL A PAGAR:                    $" + total);
         print("");
         if (elegirMetodoPago.equals("Efectivo")) {
             print("Pagó con: Efectivo:           $500.00");
